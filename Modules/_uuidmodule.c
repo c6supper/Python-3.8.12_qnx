@@ -8,8 +8,14 @@
 #include "Python.h"
 #ifdef HAVE_UUID_UUID_H
 #include <uuid/uuid.h>
-#elif defined(HAVE_UUID_H)
+#elif defined(HAVE_UUID_H) || defined(__QNX__)
 #include <uuid.h>
+#endif
+
+#ifdef __QNX__
+struct uuid_st {
+    unsigned char buff[16];
+};
 #endif
 
 static PyObject *
@@ -22,6 +28,8 @@ py_uuid_generate_time_safe(PyObject *Py_UNUSED(context),
 
     res = uuid_generate_time_safe(uuid);
     return Py_BuildValue("y#i", (const char *) uuid, sizeof(uuid), res);
+#elif defined(__QNX__)
+    uuid_rc_t status = uuid_create(&uuid);   
 #elif defined(HAVE_UUID_CREATE)
     uint32_t status;
     uuid_create(&uuid, &status);

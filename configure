@@ -5786,10 +5786,10 @@ then
 	       exp_extra="."
 	   fi
 	   LINKCC="\$(srcdir)/Modules/makexp_aix Modules/python.exp $exp_extra \$(LIBRARY); $LINKCC";;
-	QNX*)
-	   # qcc must be used because the other compilers do not
-	   # support -N.
-	   LINKCC=qcc;;
+	# QNX*)
+	#    # qcc must be used because the other compilers do not
+	#    # support -N.
+	#    LINKCC=qcc;;
 	esac
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $LINKCC" >&5
@@ -9597,13 +9597,13 @@ then
 		then
 			LINKFORSHARED='-Wl,--out-implib=$(LDLIBRARY)'
 		fi;;
-	QNX*)
-		# -Wl,-E causes the symbols to be added to the dynamic
-		# symbol table so that they can be found when a module
-		# is loaded.  -N 2048K causes the stack size to be set
-		# to 2048 kilobytes so that the stack doesn't overflow
-		# when running test_compile.py.
-		LINKFORSHARED='-Wl,-E -N 2048K';;
+	# QNX*)
+	# 	# -Wl,-E causes the symbols to be added to the dynamic
+	# 	# symbol table so that they can be found when a module
+	# 	# is loaded.  -N 2048K causes the stack size to be set
+	# 	# to 2048 kilobytes so that the stack doesn't overflow
+	# 	# when running test_compile.py.
+	# 	LINKFORSHARED='-Wl,-E -N 2048K';;
 	VxWorks*)
 		LINKFORSHARED='--export-dynamic';;
 	esac

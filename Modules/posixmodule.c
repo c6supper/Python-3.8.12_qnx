@@ -6728,6 +6728,10 @@ error:
 #endif /* defined(HAVE_OPENPTY) || defined(HAVE_FORKPTY) || defined(HAVE_DEV_PTMX) */
 
 
+#if defined(HAVE_OPENPTY) && defined(__QNX__)
+#include <unix.h>
+#endif
+
 #if defined(HAVE_OPENPTY) || defined(HAVE__GETPTY) || defined(HAVE_DEV_PTMX)
 /*[clinic input]
 os.openpty
